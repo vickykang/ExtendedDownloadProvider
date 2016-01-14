@@ -1,0 +1,62 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vivam.downloadprovider">
+
+
+
+    <!-- Allows access to the Download Manager -->
+    <permission android:name="vivam.permission.ACCESS_DOWNLOAD_MANAGER"
+        android:label="@string/permlab_downloadManager"
+        android:description="@string/permdesc_downloadManager"
+        android:protectionLevel="normal" />
+
+    <!-- Allows advanced access to the Download Manager -->
+    <permission android:name="vivam.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED"
+        android:label="@string/permlab_downloadManagerAdvanced"
+        android:description="@string/permdesc_downloadManagerAdvanced"
+        android:protectionLevel="normal" />
+
+    <!-- Allows to send broadcasts ton download completion -->'
+    <permission android:name="vivam.permission.SEND_DOWNLOAD_COMPLETED_INTENTS"
+        android:label="@string/permlab_downloadCompletedIntent"
+        android:description="@string/permdesc_downloadCompletedIntent"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="vivam.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="vivam.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED" />
+    <uses-permission android:name="vivam.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+        <provider
+            android:authorities="vivam.downloads"
+            android:name=".downloads.DownloadProvider"
+            android:exported="true" />
+
+        <service android:name=".downloads.DownloadService" />
+
+        <receiver android:name=".downloads.DownloadReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <data android:scheme="file" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".downloads.SizeLimitActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Translucent"/>
+
+    </application>
+
+</manifest>
