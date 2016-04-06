@@ -43,7 +43,7 @@ public class Downloader {
 
     public void download(final String url) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
 
         long downloadId = mManager.enqueue(request);
 
