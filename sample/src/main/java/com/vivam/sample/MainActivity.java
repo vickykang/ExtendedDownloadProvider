@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final int WHAT_CHANGED = 0;
 
-    private static final String URL = "http://14.18.142.97/m.wdjcdn.com/apk.wdjcdn.com/e/36/14f28a8638f6a5ed976282139cf0436e.apk";
+    private static final String URL = "http://219.128.78.33/7xkivg.media1.z0.glb.clouddn.com/icon/C01-18%E7%A7%8B%E6%97%A5%E7%9A%84%E7%A7%81%E8%AF%AD%2012_d1ab557727f369c5434aa6699ef7553a.mp3?e=1456730751&token=acF6EWZn9OhE2jtMDiuFdfAimVb8O_Uhyu37AK9r:oqQZVdZgITCvztV23vJhSviBU8A=&wsiphost=local";
 
     private static final String TEXT_DOWNLOAD = "下载";
     private static final String TEXT_WAITING = "等待";
