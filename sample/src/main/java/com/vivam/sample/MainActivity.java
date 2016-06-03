@@ -1,7 +1,6 @@
 package com.vivam.sample;
 
 import android.content.BroadcastReceiver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;

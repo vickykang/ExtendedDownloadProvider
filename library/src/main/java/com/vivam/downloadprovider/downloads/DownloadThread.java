@@ -232,15 +232,6 @@ class DownloadThread implements Runnable {
                 }
 
                 if (numFailed < Constants.MAX_RETRIES) {
-                    /*final NetworkInfo info = mSystemFacade.getActiveNetworkInfo(mInfo.mUid);
-                    if (info != null && info.getType() == state.mNetworkType
-                            && info.isConnected()) {
-                        // Underlying network is still intact, use normal backoff
-                        finalStatus = STATUS_WAITING_TO_RETRY;
-                    } else {
-                        // Network changed, retry on any next available
-                        finalStatus = STATUS_WAITING_FOR_NETWORK;
-                    }*/
                     Integer networkType = mSystemFacade.getActiveNetworkType();
                     if (networkType != null && networkType == state.mNetworkType) {
                         // Underlying network is still intact, use normal backoff
@@ -392,47 +383,12 @@ class DownloadThread implements Runnable {
                     throw new StopRequestException(STATUS_HTTP_DATA_ERROR, e);
                 }
             }
-            /*try {
-                if (DownloadDrmHelper.isDrmConvertNeeded(state.mMimeType)) {
-                    drmClient = new DrmManagerClient(mContext);
-                    final RandomAccessFile file = new RandomAccessFile(
-                            new File(state.mFilename), "rw");
-                    out = new DrmOutputStream(drmClient, file, state.mMimeType);
-                    outFd = file.getFD();
-                } else {
-                    out = new FileOutputStream(state.mFilename, true);
-                    outFd = ((FileOutputStream) out).getFD();
-                }
-            } catch (IOException e) {
-                throw new StopRequestException(STATUS_FILE_ERROR, e);
-            }*/
 
             // Start streaming data, periodically watch for pause/cancel
             // commands and checking disk space as needed.
             transferData(state, in);
 
-            /*try {
-                if (out instanceof DrmOutputStream) {
-                    ((DrmOutputStream) out).finish();
-                }
-            } catch (IOException e) {
-                throw new StopRequestException(STATUS_FILE_ERROR, e);
-            }*/
-
         } finally {
-            /*if (drmClient != null) {
-                drmClient.release();
-            }
-
-            IoUtils.closeQuietly(in);
-
-            try {
-                if (out != null) out.flush();
-                if (outFd != null) outFd.sync();
-            } catch (IOException e) {
-            } finally {
-                IoUtils.closeQuietly(out);
-            }*/
             closeDestination(state);
         }
     }
